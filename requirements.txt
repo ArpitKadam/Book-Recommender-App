@@ -3,5 +3,6 @@ pandas
 numpy
 ipykernel
 PyYAML
+colorlog
 streamlit
 -e .
