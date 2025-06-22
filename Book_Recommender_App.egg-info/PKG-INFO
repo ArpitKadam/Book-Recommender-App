@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: Book-Recommender-App
+Version: 0.0.0
+Summary: End to End Book Recommender System
+Author: ArpitKadam
+Author-email: arpitkadam922@gmail.com
+License-File: LICENSE
+Requires-Dist: scikit-learn
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: ipykernel
+Requires-Dist: PyYAML
+Requires-Dist: streamlit
+Dynamic: author
+Dynamic: author-email
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary

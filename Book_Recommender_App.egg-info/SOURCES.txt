@@ -1,0 +1,8 @@
+LICENSE
+README.md
+setup.py
+Book_Recommender_App.egg-info/PKG-INFO
+Book_Recommender_App.egg-info/SOURCES.txt
+Book_Recommender_App.egg-info/dependency_links.txt
+Book_Recommender_App.egg-info/requires.txt
+Book_Recommender_App.egg-info/top_level.txt
