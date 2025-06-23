@@ -49,7 +49,7 @@ class DataValidation:
             logger.info(f"New column names: {ratings.columns}")
 
             logger.info("Only keeping users with more than 150 ratings")
-            x = ratings['user_id'].value_counts() > 150
+            x = ratings['user_id'].value_counts() > 200
             y = x[x].index
             ratings = ratings[ratings['user_id'].isin(y)]
             logger.info(f"Ratings DataFrame Shape after filtering: {ratings.shape}")
@@ -66,7 +66,7 @@ class DataValidation:
             logger.info("Ratings Count Obtained Successfully")
 
             logger.info("Filtering Books with more than 50 ratings")
-            final_ratings = final_ratings[final_ratings['num_ratings'] >= 50]
+            final_ratings = final_ratings[final_ratings['num_ratings'] >= 100]
             logger.info("Filtered Successfully")
 
             logger.info("Dropping Duplicates")

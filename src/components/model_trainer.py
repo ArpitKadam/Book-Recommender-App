@@ -28,7 +28,7 @@ class ModelTrainer:
             logger.info("Data sparsified successfully")
 
             logger.info("Fitting Data to Model...")
-            model = NearestNeighbors(algorithm='brute')
+            model = NearestNeighbors(algorithm='brute', n_neighbors=6)
             model.fit(book_sparse)
             logger.info("Data fitted to model successfully")
 

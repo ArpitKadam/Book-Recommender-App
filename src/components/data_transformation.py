@@ -47,7 +47,12 @@ class DataTransformation:
             transformed_data_path = os.path.join(self.data_transformation_config.transformed_data_dir, 'book_pivot.pkl')
             pickle.dump(book_pivot, open(transformed_data_path, 'wb'))
             logger.info("Saved book_pivot data successfully")
-        
+
+            # Save final_ratings DataFrame with 'title', 'image_url', etc.
+            final_ratings_path = os.path.join(self.data_transformation_config.transformed_data_dir, 'final_ratings.pkl')
+            pickle.dump(df, open(final_ratings_path, 'wb'))
+            logger.info("Saved final_ratings DataFrame with titles and metadata successfully")
+
         except Exception as e:
             logger.error(f"Error occurred while getting transformed data: {e}")
             raise CustomException(e, sys)

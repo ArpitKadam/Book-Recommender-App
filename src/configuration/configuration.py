@@ -3,7 +3,7 @@ import sys
 from src.logger import logger
 from src.exception import CustomException
 from src.utils import read_yaml
-from src.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig
+from src.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig, ModelRecommendationConfig
 from src.constants import CONFIG_FILE_PATH
 import logging
 
@@ -117,4 +117,28 @@ class AppConfiguration:
 
         except Exception as e:
             logger.error(f"Error occurred while getting model trainer config: {e}")
+            raise CustomException(e, sys)
+    
+    def get_model_recommendation_config(self) -> ModelRecommendationConfig:
+        try:
+            artifacts_dir = self.config['artifacts_config']['artifacts_dir']
+            model_trainer_config = self.config['model_trainer_config']
+            data_transformation_config = self.config['data_transformation_config']
+
+            book_name_serialized_object = os.path.join(artifacts_dir, data_transformation_config['data_transformation_dir'], data_transformation_config['transformed_data_dir'], 'book_names.pkl')
+            book_pivot_serialized_object = os.path.join(artifacts_dir, data_transformation_config['data_transformation_dir'], data_transformation_config['transformed_data_dir'], 'book_pivot.pkl')
+            final_ratings_serialized_object = os.path.join(artifacts_dir, data_transformation_config['data_transformation_dir'], data_transformation_config['transformed_data_dir'], 'final_ratings.pkl')
+            trained_model_path = os.path.join(artifacts_dir, model_trainer_config['model_trainer_dir'], model_trainer_config['trained_model_name'])
+
+            response = ModelRecommendationConfig(book_name_serialized_object=book_name_serialized_object,
+                                                 book_pivot_serialized_object=book_pivot_serialized_object,
+                                                 final_ratings_serialized_object=final_ratings_serialized_object,
+                                                 trained_model_path=trained_model_path
+                                                )
+            
+            logger.info(f"Model Recommendation Config: {response}")
+            return response
+        
+        except Exception as e:
+            logger.error(f"Error occurred while getting model recommendation config: {e}")
             raise CustomException(e, sys)
