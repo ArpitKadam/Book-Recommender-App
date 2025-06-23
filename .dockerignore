@@ -1,0 +1,16 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.dvc/cache/
+.dvc/tmp/
+.dvc/config.local
+.dvc/plots/
+.dvc/lock
+.git/
+.gitignore
+.env
+*.zip
+*.tar.gz
