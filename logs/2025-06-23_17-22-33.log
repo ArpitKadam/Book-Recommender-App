@@ -1,0 +1,70 @@
+[2025-06-23 17:22:37]   92 | INFO     | Data Transformation Config: DataTransformationConfig(data_transformation_dir='artifacts\\data_transformation', clean_data_dir='artifacts\\data_validation\\clean_data\\final_ratings.csv', transformed_data_dir='artifacts\\data_transformation\\transformed_data')
+[2025-06-23 17:22:37]  115 | INFO     | Model Trainer Config: ModelTrainerConfig(model_trainer_dir='artifacts\\model_trainer', trained_model_name='model.pkl', transformed_data_file_path='artifacts\\data_transformation\\transformed_data\\transformed_data.pkl')
+[2025-06-23 17:22:37]   18 | INFO     | ****************************************************************************************************
+[2025-06-23 17:22:37]   49 | INFO     | Initiating data ingestion
+[2025-06-23 17:22:37]   21 | INFO     | Downloading data from https://github.com/ArpitKadam/Book-Recommender-App/raw/refs/heads/main/research/archive.zip
+[2025-06-23 17:22:37]   24 | INFO     | Created directory artifacts\data_ingestion\raw_data
+[2025-06-23 17:22:37]   26 | INFO     | File name: archive.zip
+[2025-06-23 17:22:45]   29 | INFO     | Data downloaded successfully to: artifacts\data_ingestion\raw_data\archive.zip
+[2025-06-23 17:22:45]   39 | INFO     | Created directory artifacts\data_ingestion\ingested_data
+[2025-06-23 17:22:46]   42 | INFO     | Zip file extracted successfully to artifacts\data_ingestion\ingested_data
+[2025-06-23 17:22:46]   52 | INFO     | Data ingestion completed successfully
+[2025-06-23 17:22:46]   20 | INFO     | ****************************************************************************************************
+[2025-06-23 17:22:46]   94 | INFO     | Initiating data validation
+[2025-06-23 17:22:49]   23 | INFO     | Ratings DataFrame Shape (1149780, 3)
+[2025-06-23 17:22:49]   24 | INFO     | Books DataFrame Shape (271360, 8)
+[2025-06-23 17:22:49]   26 | INFO     | Ratings DataFrame Columns Index(['User-ID', 'ISBN', 'Book-Rating'], dtype='object')
+[2025-06-23 17:22:49]   27 | INFO     | Books DataFrame Columns Index(['ISBN', 'Book-Title', 'Book-Author', 'Year-Of-Publication', 'Publisher',
+       'Image-URL-S', 'Image-URL-M', 'Image-URL-L'],
+      dtype='object')
+[2025-06-23 17:22:49]   29 | INFO     | Dropping Unnecessary Columns from Ratings DataFrame
+[2025-06-23 17:22:49]   32 | INFO     | Renaming Columns in Books DataFrame
+[2025-06-23 17:22:49]   40 | INFO     | Columns Renamed Successfully
+[2025-06-23 17:22:49]   41 | INFO     | New column names: Index(['ISBN', 'title', 'author', 'year', 'publisher', 'url'], dtype='object')
+[2025-06-23 17:22:49]   43 | INFO     | Renaming Columns in Ratings DataFrame
+[2025-06-23 17:22:49]   48 | INFO     | Columns Renamed Successfully
+[2025-06-23 17:22:49]   49 | INFO     | New column names: Index(['user_id', 'ISBN', 'rating'], dtype='object')
+[2025-06-23 17:22:49]   51 | INFO     | Only keeping users with more than 150 ratings
+[2025-06-23 17:22:49]   55 | INFO     | Ratings DataFrame Shape after filtering: (582644, 3)
+[2025-06-23 17:22:49]   57 | INFO     | Merging Ratings and Books DataFrames
+[2025-06-23 17:22:50]   59 | INFO     | Merged Successfully
+[2025-06-23 17:22:50]   60 | INFO     | New DataFrame Shape (539227, 8)
+[2025-06-23 17:22:50]   62 | INFO     | Getting Ratings Count for Each Book
+[2025-06-23 17:22:50]   66 | INFO     | Ratings Count Obtained Successfully
+[2025-06-23 17:22:50]   68 | INFO     | Filtering Books with more than 50 ratings
+[2025-06-23 17:22:50]   70 | INFO     | Filtered Successfully
+[2025-06-23 17:22:50]   72 | INFO     | Dropping Duplicates
+[2025-06-23 17:22:51]   74 | INFO     | Dropped Successfully
+[2025-06-23 17:22:51]   76 | INFO     | Final DataFrame Shape (75365, 9)
+[2025-06-23 17:22:51]   79 | INFO     | Clean Data Directory Created: artifacts\data_validation\clean_data
+[2025-06-23 17:22:51]   81 | INFO     | Clean Data Saved Successfully to artifacts\data_validation\clean_data
+[2025-06-23 17:22:51]   84 | INFO     | Serialized Data Directory Created: artifacts\data_validation\serialized_data
+[2025-06-23 17:22:51]   86 | INFO     | Serialized Data Saved Successfully to artifacts\data_validation\serialized_data
+[2025-06-23 17:22:51]   96 | INFO     | Data validation completed successfully
+[2025-06-23 17:22:51]   22 | INFO     | ****************************************************************************************************
+[2025-06-23 17:22:51]   57 | INFO     | Data Transformation initiated
+[2025-06-23 17:22:51]   21 | INFO     | Getting validated data from artifacts\data_validation\clean_data
+[2025-06-23 17:22:51]   25 | INFO     | Got validated data successfully
+[2025-06-23 17:22:51]   28 | INFO     | Filled NaN values with 0
+[2025-06-23 17:22:51]   30 | INFO     | Creating directory artifacts\data_transformation\transformed_data
+[2025-06-23 17:22:51]   32 | INFO     | Saving transformed data to artifacts\data_transformation\transformed_data
+[2025-06-23 17:22:51]   35 | INFO     | Saved transformed data successfully
+[2025-06-23 17:22:51]   38 | INFO     | Got book names successfully
+[2025-06-23 17:22:51]   40 | INFO     | Saving book names to pickle file to artifacts\data_transformation\transformed_data
+[2025-06-23 17:22:51]   43 | INFO     | Saved book names successfully
+[2025-06-23 17:22:51]   46 | INFO     | Saving book_pivot data to artifacts\data_transformation\transformed_data
+[2025-06-23 17:22:51]   49 | INFO     | Saved book_pivot data successfully
+[2025-06-23 17:22:51]   59 | INFO     | Data Transformation completed
+[2025-06-23 17:22:51]   24 | INFO     | ****************************************************************************************************
+[2025-06-23 17:22:51]   54 | INFO     | Initiating model training
+[2025-06-23 17:22:51]   21 | INFO     | Loading data...
+[2025-06-23 17:22:51]   24 | INFO     | Data loaded successfully from artifacts\data_transformation\transformed_data\transformed_data.pkl
+[2025-06-23 17:22:51]   26 | INFO     | Sparsifying data...
+[2025-06-23 17:22:51]   28 | INFO     | Data sparsified successfully
+[2025-06-23 17:22:51]   30 | INFO     | Fitting Data to Model...
+[2025-06-23 17:22:51]   33 | INFO     | Data fitted to model successfully
+[2025-06-23 17:22:51]   35 | INFO     | Saving model...
+[2025-06-23 17:22:51]   38 | INFO     | Creating Directory : artifacts\model_trainer
+[2025-06-23 17:22:51]   42 | INFO     | Model saved at: artifacts\model_trainer\model.pkl
+[2025-06-23 17:22:51]   56 | INFO     | Model training completed successfully
+[2025-06-23 17:22:51]   26 | INFO     | ****************************************************************************************************

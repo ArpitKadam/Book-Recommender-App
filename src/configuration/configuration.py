@@ -3,7 +3,7 @@ import sys
 from src.logger import logger
 from src.exception import CustomException
 from src.utils import read_yaml
-from src.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig
+from src.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig
 from src.constants import CONFIG_FILE_PATH
 import logging
 
@@ -94,4 +94,27 @@ class AppConfiguration:
 
         except Exception as e:
             logger.error(f"Error occurred while getting data transformation config: {e}")
+            raise CustomException(e, sys)
+    
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        try:
+            model_trainer_config = self.config['model_trainer_config']
+            data_transformation_config = self.config['data_transformation_config']
+            artifacts_dir = self.config['artifacts_config']['artifacts_dir']
+            model_trainer_dir = model_trainer_config['model_trainer_dir']
+
+            transformed_data_file_path = os.path.join(artifacts_dir, data_transformation_config['data_transformation_dir'], data_transformation_config['transformed_data_dir'], 'transformed_data.pkl')
+            trained_model_dir = os.path.join(artifacts_dir, model_trainer_dir)
+            trained_model_name = model_trainer_config['trained_model_name']
+
+            response = ModelTrainerConfig(model_trainer_dir=trained_model_dir,
+                                           trained_model_name=trained_model_name,
+                                           transformed_data_file_path=transformed_data_file_path
+                                        )
+            
+            logger.info(f"Model Trainer Config: {response}")
+            return response
+
+        except Exception as e:
+            logger.error(f"Error occurred while getting model trainer config: {e}")
             raise CustomException(e, sys)
