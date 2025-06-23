@@ -12,3 +12,8 @@ DataValidationConfig = namedtuple("DataValidationConfig",['data_validation_dir',
                                                          'book_csv_file',
                                                          'ratings_csv_file'
                                                     ])
+
+DataTransformationConfig = namedtuple("DataTransformationConfig",['data_transformation_dir',
+                                                                  'clean_data_dir',
+                                                                  'transformed_data_dir',
+                                                    ])

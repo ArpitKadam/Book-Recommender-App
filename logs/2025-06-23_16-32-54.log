@@ -1,0 +1,57 @@
+[2025-06-23 16:32:54]   92 | INFO     | Data Transformation Config: DataTransformationConfig(data_transformation_dir='artifacts\\data_transformation', clean_data_dir='artifacts\\data_validation\\clean_data\\final_ratings.csv', transformed_data_dir='artifacts\\data_transformation\\transformed_data')
+[2025-06-23 16:32:54]   16 | INFO     | **************************************************
+[2025-06-23 16:32:54]   49 | INFO     | Initiating data ingestion
+[2025-06-23 16:32:54]   21 | INFO     | Downloading data from https://github.com/ArpitKadam/Book-Recommender-App/raw/refs/heads/main/research/archive.zip
+[2025-06-23 16:32:54]   24 | INFO     | Created directory artifacts\data_ingestion\raw_data
+[2025-06-23 16:32:54]   26 | INFO     | File name: archive.zip
+[2025-06-23 16:33:31]   29 | INFO     | Data downloaded successfully to: artifacts\data_ingestion\raw_data\archive.zip
+[2025-06-23 16:33:31]   39 | INFO     | Created directory artifacts\data_ingestion\ingested_data
+[2025-06-23 16:33:31]   42 | INFO     | Zip file extracted successfully to artifacts\data_ingestion\ingested_data
+[2025-06-23 16:33:31]   52 | INFO     | Data ingestion completed successfully
+[2025-06-23 16:33:31]   18 | INFO     | **************************************************
+[2025-06-23 16:33:31]   94 | INFO     | Initiating data validation
+[2025-06-23 16:33:33]   23 | INFO     | Ratings DataFrame Shape (1149780, 3)
+[2025-06-23 16:33:33]   24 | INFO     | Books DataFrame Shape (271360, 8)
+[2025-06-23 16:33:33]   26 | INFO     | Ratings DataFrame Columns Index(['User-ID', 'ISBN', 'Book-Rating'], dtype='object')
+[2025-06-23 16:33:33]   27 | INFO     | Books DataFrame Columns Index(['ISBN', 'Book-Title', 'Book-Author', 'Year-Of-Publication', 'Publisher',
+       'Image-URL-S', 'Image-URL-M', 'Image-URL-L'],
+      dtype='object')
+[2025-06-23 16:33:33]   29 | INFO     | Dropping Unnecessary Columns from Ratings DataFrame
+[2025-06-23 16:33:33]   32 | INFO     | Renaming Columns in Books DataFrame
+[2025-06-23 16:33:33]   40 | INFO     | Columns Renamed Successfully
+[2025-06-23 16:33:33]   41 | INFO     | New column names: Index(['ISBN', 'title', 'author', 'year', 'publisher', 'url'], dtype='object')
+[2025-06-23 16:33:33]   43 | INFO     | Renaming Columns in Ratings DataFrame
+[2025-06-23 16:33:33]   48 | INFO     | Columns Renamed Successfully
+[2025-06-23 16:33:33]   49 | INFO     | New column names: Index(['user_id', 'ISBN', 'rating'], dtype='object')
+[2025-06-23 16:33:33]   51 | INFO     | Only keeping users with more than 150 ratings
+[2025-06-23 16:33:33]   55 | INFO     | Ratings DataFrame Shape after filtering: (582644, 3)
+[2025-06-23 16:33:33]   57 | INFO     | Merging Ratings and Books DataFrames
+[2025-06-23 16:33:34]   59 | INFO     | Merged Successfully
+[2025-06-23 16:33:34]   60 | INFO     | New DataFrame Shape (539227, 8)
+[2025-06-23 16:33:34]   62 | INFO     | Getting Ratings Count for Each Book
+[2025-06-23 16:33:34]   66 | INFO     | Ratings Count Obtained Successfully
+[2025-06-23 16:33:34]   68 | INFO     | Filtering Books with more than 50 ratings
+[2025-06-23 16:33:34]   70 | INFO     | Filtered Successfully
+[2025-06-23 16:33:34]   72 | INFO     | Dropping Duplicates
+[2025-06-23 16:33:34]   74 | INFO     | Dropped Successfully
+[2025-06-23 16:33:34]   76 | INFO     | Final DataFrame Shape (75365, 9)
+[2025-06-23 16:33:34]   79 | INFO     | Clean Data Directory Created: artifacts\data_validation\clean_data
+[2025-06-23 16:33:35]   81 | INFO     | Clean Data Saved Successfully to artifacts\data_validation\clean_data
+[2025-06-23 16:33:35]   84 | INFO     | Serialized Data Directory Created: artifacts\data_validation\serialized_data
+[2025-06-23 16:33:35]   86 | INFO     | Serialized Data Saved Successfully to artifacts\data_validation\serialized_data
+[2025-06-23 16:33:35]   96 | INFO     | Data validation completed successfully
+[2025-06-23 16:33:35]   20 | INFO     | **************************************************
+[2025-06-23 16:33:35]   57 | INFO     | Data Transformation initiated
+[2025-06-23 16:33:35]   21 | INFO     | Getting validated data from artifacts\data_validation\clean_data
+[2025-06-23 16:33:35]   25 | INFO     | Got validated data successfully
+[2025-06-23 16:33:35]   28 | INFO     | Filled NaN values with 0
+[2025-06-23 16:33:35]   30 | INFO     | Creating directory artifacts\data_transformation\transformed_data
+[2025-06-23 16:33:35]   32 | INFO     | Saving transformed data to artifacts\data_transformation\transformed_data
+[2025-06-23 16:33:35]   35 | INFO     | Saved transformed data successfully
+[2025-06-23 16:33:35]   38 | INFO     | Got book names successfully
+[2025-06-23 16:33:35]   40 | INFO     | Saving book names to pickle file to artifacts\data_transformation\transformed_data
+[2025-06-23 16:33:35]   43 | INFO     | Saved book names successfully
+[2025-06-23 16:33:35]   46 | INFO     | Saving book_pivot data to artifacts\data_transformation\transformed_data
+[2025-06-23 16:33:35]   49 | INFO     | Saved book_pivot data successfully
+[2025-06-23 16:33:35]   59 | INFO     | Data Transformation completed
+[2025-06-23 16:33:35]   22 | INFO     | **************************************************

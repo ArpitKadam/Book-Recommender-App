@@ -3,7 +3,7 @@ import sys
 from src.logger import logger
 from src.exception import CustomException
 from src.utils import read_yaml
-from src.entity.config_entity import DataIngestionConfig, DataValidationConfig
+from src.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig
 from src.constants import CONFIG_FILE_PATH
 import logging
 
@@ -70,4 +70,28 @@ class AppConfiguration:
 
         except Exception as e:
             logger.error(f"Error occurred while getting data validation config: {e}")
+            raise CustomException(e, sys)
+    
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        try:
+            data_transformation_config = self.config['data_transformation_config']
+            data_validation_config = self.config['data_validation_config']
+            data_ingestion_config = self.config['data_ingestion_config']
+            artifacts_dir = self.config['artifacts_config']['artifacts_dir']
+            data_transformation_dir = data_transformation_config['data_transformation_dir']
+
+            data_transformation_dir_path = os.path.join(artifacts_dir, data_transformation_dir)
+            cleaned_data_path = os.path.join(artifacts_dir, data_validation_config['data_validation_dir'], data_validation_config['clean_data_dir'], 'final_ratings.csv')
+            transformed_data_dir = os.path.join(artifacts_dir, data_transformation_dir, data_transformation_config['transformed_data_dir'])
+
+            response = DataTransformationConfig(data_transformation_dir=data_transformation_dir_path,
+                                                clean_data_dir=cleaned_data_path,
+                                                transformed_data_dir=transformed_data_dir
+                                                )
+            
+            logger.info(f"Data Transformation Config: {response}")
+            return response
+
+        except Exception as e:
+            logger.error(f"Error occurred while getting data transformation config: {e}")
             raise CustomException(e, sys)
