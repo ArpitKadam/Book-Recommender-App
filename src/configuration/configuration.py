@@ -36,7 +36,6 @@ class AppConfiguration:
                                             ingested_data_dir=ingested_dir_path
                                             )
             
-            logging.info(f"Data Ingestion Config: {response}")
             return response
 
         except Exception as e:
@@ -65,7 +64,6 @@ class AppConfiguration:
                                              ratings_csv_file=ratings_csv_file_path
                                             )
             
-            logging.info(f"Data Validation Config: {response}")
             return response
 
         except Exception as e:
@@ -89,7 +87,6 @@ class AppConfiguration:
                                                 transformed_data_dir=transformed_data_dir
                                                 )
             
-            logger.info(f"Data Transformation Config: {response}")
             return response
 
         except Exception as e:
@@ -112,7 +109,6 @@ class AppConfiguration:
                                            transformed_data_file_path=transformed_data_file_path
                                         )
             
-            logger.info(f"Model Trainer Config: {response}")
             return response
 
         except Exception as e:
@@ -136,7 +132,6 @@ class AppConfiguration:
                                                  trained_model_path=trained_model_path
                                                 )
             
-            logger.info(f"Model Recommendation Config: {response}")
             return response
         
         except Exception as e:
