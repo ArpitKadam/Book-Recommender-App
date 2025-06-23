@@ -14,6 +14,7 @@ files = [
     f"{project_name}/__init__.py",
     f"{project_name}/components/__init__.py",
     f"{project_name}/configuration/__init__.py",
+    f"{project_name}/configuration/configuration.py",
     f"{project_name}/constants/__init__.py",
     f"{project_name}/entity/__init__.py",
     f"{project_name}/entity/config_entity.py",
@@ -28,6 +29,7 @@ files = [
     "setup.py",
     "config/model.yaml",
     "config/schema.yaml",
+    "config/config.yaml"
 ]
 
 for file_path in files:
