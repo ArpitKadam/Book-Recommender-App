@@ -3,7 +3,7 @@ import sys
 from src.logger import logger
 from src.exception import CustomException
 from src.utils import read_yaml
-from src.entity.config_entity import DataIngestionConfig
+from src.entity.config_entity import DataIngestionConfig, DataValidationConfig
 from src.constants import CONFIG_FILE_PATH
 import logging
 
@@ -42,9 +42,32 @@ class AppConfiguration:
         except Exception as e:
             logger.error(f"Error occurred while getting data ingestion config: {e}")
             raise CustomException(e, sys)
+    
+    def get_data_validation_config(self) -> DataValidationConfig:
+        try:
+            data_validation_config = self.config['data_validation_config']
+            data_ingestion_config = self.config['data_ingestion_config']
+            dataset_dir = data_ingestion_config['data_ingestion_dir']
+            artifacts_dir = self.config['artifacts_config']['artifacts_dir']
+            data_validation_dir = data_validation_config['data_validation_dir']
+            book_csv_file = data_validation_config['book_csv_file']
+            ratings_csv_file = data_validation_config['ratings_csv_file']
 
+            clean_data_path = os.path.join(artifacts_dir, data_validation_dir, data_validation_config['clean_data_dir'])
+            serialized_object_path = os.path.join(artifacts_dir, data_validation_dir, data_validation_config['serialized_data_dir'])
+            book_csv_file_path = os.path.join(artifacts_dir, dataset_dir, data_ingestion_config['ingested_data_dir'], book_csv_file)
+            ratings_csv_file_path = os.path.join(artifacts_dir, dataset_dir, data_ingestion_config['ingested_data_dir'], ratings_csv_file)
 
-if __name__ == "__main__":
-    app_config = AppConfiguration()
-    data_ingestion_config = app_config.get_data_ingestion_config()
-    print(data_ingestion_config)
+            response = DataValidationConfig(data_validation_dir=data_validation_dir,
+                                             clean_data_dir=clean_data_path,
+                                             serialized_data_dir=serialized_object_path,
+                                             book_csv_file=book_csv_file_path,
+                                             ratings_csv_file=ratings_csv_file_path
+                                            )
+            
+            logging.info(f"Data Validation Config: {response}")
+            return response
+
+        except Exception as e:
+            logger.error(f"Error occurred while getting data validation config: {e}")
+            raise CustomException(e, sys)
